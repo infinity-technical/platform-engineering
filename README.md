@@ -21,7 +21,7 @@ It is stated that unprovisioned servers on which the solution should work will b
 
 ### 1.2 How much time do changes take currently ?
 
-An improvement in delivery time should be delivered.
+The solution should measurably improve delivery time.
  
 ### 1.3 Can the load balancer affect the operation of the Apache web server ?
 
