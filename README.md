@@ -295,7 +295,7 @@ The server has sufficient storage capacity, should the decision be taken to comp
 
   * ServerRoot is set to /opt/apache
   * User and group are set to root
-  * ServerAdmin directs email to webmasters@leodis.ac.uk - who is that ?
+  * ServerAdmin directs email to webmasters@leodis.ac.uk
   * DocumentRoot is set to /opt/web/www
   * Directory AllowOverride disables .htaccess configuration for the server root and /opt/web/www
   * Directory Options enables symbolic linking
@@ -339,9 +339,11 @@ ProxyPass sets the Apache web server as a gateway for the Node process that list
 
 Crontab for the root user does not contain any log management commands
 
-/opt/apache/logs/access_log
-/opt/apache/logs/error_log shows that Apache is version 2.2.4
-/opt/apache/logs/httpd.pid
+The log files are present and contain the expected information
+
+  * /opt/apache/logs/access_log
+  * /opt/apache/logs/error_log shows that Apache is version 2.2.4
+  * /opt/apache/logs/httpd.pid
 
 ### 5.12 Investigate Apache web content
 
@@ -353,6 +355,11 @@ Confirm the process id for the node process detected with the process list
 
     ubuntu@ip-172-31-4-0:/$ pgrep node
     853
+
+Confirm the binary that is running with the node command is issued
+
+    ubuntu@ip-172-31-4-0:/$ which node
+    /usr/local/bin/node
 
 Find out which files the node process is using
 
@@ -498,14 +505,14 @@ This will enable verification of continued functionality of the site during qual
 
 A manual examination of the site provides this intial site map
 
-|URL |Notes |
-|--|--|
-|${REMOTE_FQDN}/home |Text |
-|${REMOTE_FQDN}/courses |Links to french and computing |
-|${REMOTE_FQDN}/courses/french |Text |
-|${REMOTE_FQDN}/courses/computing |Text |
-|${REMOTE_FQDN}/mail |Text |
-|${REMOTE_FQDN}/vle |Authentication form to POST to /vle/ with a hidden form element called next set to /admin/ |
+| URL | Content |
+| --- | --- |
+| ${REMOTE_FQDN}/home | Text |
+| ${REMOTE_FQDN}/courses | Links to french and computing |
+| ${REMOTE_FQDN}/courses/french | Text |
+| ${REMOTE_FQDN}/courses/computing | Text |
+| ${REMOTE_FQDN}/mail | Text |
+| ${REMOTE_FQDN}/vle | Authentication form to POST to /vle/ with a hidden form element called next set to /admin/ |
 
 ## 7 Solution design considerations
 
