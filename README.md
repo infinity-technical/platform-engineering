@@ -18,7 +18,7 @@ It is stated that unprovisioned servers on which the solution should work will b
 
 An improvement in delivery time should be established
  
-### Can the load balancer affect the operation of the web servers
+### Can the load balancer affect the operation of the web servers ?
 
 A simple load balancing approach should not; a more sophisticated approach may involve changes to the requests and responses.
 
@@ -28,15 +28,13 @@ Any assumptions that have been made will be listed here so that they can be test
 
 **The username ubuntu does not mean that the target operating system is ubuntu.**  Check the OS on the server.
 
-**A valid key can be extracted from the supplied PEM container.** May not be needed if Amazon can authenticate with the PEM
-
 **The load balancer does not affect the operation of the web servers.** I've requested further information about this.
 
 **Tweaks to the Apache configuration were conducted within the Apache configuration files.** Investigation may extend to other areas of the operating system.
 
 **The web developers mentioned in the user story are internal staff in the web team mentioned in the background.** Solutions available to permanent staff may not be available to contract, freelance or other web developers.
 
-**Local machine has Git installed, an active internet connection and the PEM file that was supplied for authentication with the target
+**The platform engineer has a working local environment.** Git installed, an active internet connection and the PEM file that was supplied for authentication with the target.
 
 ## Approach and rationale
 
