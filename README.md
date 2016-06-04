@@ -2,6 +2,17 @@
 
 This repository does not include the original problem specification, which is available locally
 
+## Contents
+
+  1. Questions
+  2. Assumptions
+  3. Stakeholders
+  4. Preparation of platform engineer working environemnt
+  5. Information gathering
+  6. Solution design considerations
+  7. Solution documentation 
+  8. Solution resources
+
 ## 1 Questions
 
 ### 1.1 Which operating systems may be used for unprovisioned servers ?
@@ -43,7 +54,7 @@ Ansible binaries are present in /usr/local/bin, and the ubuntu user's home direc
   * Web browser (Vivaldi)
   * SSH client (OpenSSH)
 
-## 3 Identify stakeholders
+## 3 Stakeholders
 
 * Technical test co-ordinator
 * Platform engineer
@@ -499,7 +510,7 @@ The /var/node/leodis/views directory contains the content and /var/node/leodis/v
     </body>
     </html>
 
-### 6 Map the website
+### 5.14 Map the website
 
 A manual examination of the site provides this initial site map will enable verification of continued functionality of the site during quality assurance
 
@@ -512,7 +523,7 @@ A manual examination of the site provides this initial site map will enable veri
 | ${REMOTE_FQDN}/mail | Text |
 | ${REMOTE_FQDN}/vle | Authentication form to POST to /vle/ with a hidden form element called next set to /admin/ |
 
-## 7 Solution design considerations
+## 6 Solution design considerations
 
 Although there are several considerations for the Apache webserver, it is proxying all requests to the Node web server.  The assignment specifies Apache configuration management.  Consider reviewing the option to promote Node to listen directly to port 80 without Apache as a gateway.
 
@@ -522,10 +533,10 @@ Consider enhancements to the current Apache configuration to implement log manag
 
 Consider quality assurance measures to demonstrate the continuity of existing functionality.  These may include liaison with staff, compliance with existing practices and integration with existing processes for quality assurance (functionality testing), operational support (monitoring and notification) and change management.
 
-## 8 Solution documentation
+## 7 Solution documentation
 
 Documenatary information about the solution will be published here
 
-## 9 Solution resources
+## 8 Solution resources
 
 Code, examples and other non-documentary information will be published here
