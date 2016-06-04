@@ -23,7 +23,7 @@ It is stated that unprovisioned servers on which the solution should work will b
 
 The solution should measurably improve delivery time.
  
-### 1.3 Can the load balancer affect the operation of the Apache web server ?
+### 1.3 Does the load balancer affect the operation of the Apache web server ?
 
 A simple load balancing approach should not; a more sophisticated approach may involve changes to the requests and responses which will need to be investigated as part of a comprehensive solution defintion.
 
