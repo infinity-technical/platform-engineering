@@ -501,9 +501,7 @@ The /var/node/leodis/views directory contains the content and /var/node/leodis/v
 
 ### 6 Map the website
 
-This will enable verification of continued functionality of the site during quality assurance
-
-A manual examination of the site provides this intial site map
+A manual examination of the site provides this initial site map will enable verification of continued functionality of the site during quality assurance
 
 | URL | Content |
 | --- | --- |
