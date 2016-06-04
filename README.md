@@ -107,7 +107,7 @@ File format is not specified by extension
 
 A request for a sitemap.xml file gets a text response
 
-  Cannot GET /sitemap.xml
+    Cannot GET /sitemap.xml
   
 Similar responses are received for other files which are unlikely to exist
 
