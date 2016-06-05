@@ -26,7 +26,7 @@ The solution should measurably improve delivery time.
 ### 1.3 Does the load balancer affect the operation of the Apache web server ?
 
 A simple load balancing approach should not; a more sophisticated approach may involve changes to the requests and responses which will need to be investigated as part of a comprehensive solution defintion.
-
+x   
 ### 1.4 Is version control with Subversion a part of the current server management strategy ?
 
 /opt/apache/conf/extra/httpd-vhosts.conf contains information about a Subversion repository
@@ -159,6 +159,31 @@ Checked for scheduled commands for the ubuntu user and the root user
     no crontab for root
 
 ### 5.07 Confirm the operating system on the target
+
+The message of the day presented on authentication shows
+
+    Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-94-virtual x86_64)
+
+     * Documentation:  https://help.ubuntu.com/
+
+      System information as of Sat Jun  4 23:49:19 PDT 2016
+
+      System load:  0.0               Processes:           71
+      Usage of /:   16.0% of 7.86GB   Users logged in:     0
+      Memory usage: 10%               IP address for eth0: 172.31.4.0
+      Swap usage:   0%
+
+      Graph this data and manage this system at:
+        https://landscape.canonical.com/
+
+      Get cloud support with Ubuntu Advantage Cloud Guest:
+        http://www.ubuntu.com/business/services/cloud
+
+    69 packages can be updated.
+    56 updates are security updates.
+
+    New release '14.04.3 LTS' available.
+    Run 'do-release-upgrade' to upgrade to it.
 
 Uname reports
 
@@ -527,15 +552,41 @@ A manual examination of the site provides this initial site map will enable veri
 
 Although there are several considerations for the Apache webserver, it is proxying all requests to the Node web server.  The assignment specifies Apache configuration management.  Consider reviewing the option to promote Node to listen directly to port 80 without Apache as a gateway.
 
+### Apache web server
+
 The version of Apache installed is 2.2.4; the most recent release is 2.4.20 and the most recent in the 2.2 series is 2.2.31.  The inclusion of non-public information such as staff email on the a public web server, along with the legacy version of the web server and use of HTTP instead of HTTPS, indicate that a vulnerability scanner (Zed Attack Proxy, BurpSuite or similar OWASP standard) should be used to help identify risks in the web tier and mitigation strategies.
 
 Consider enhancements to the current Apache configuration to implement log management strategies (log rotation, archiving, connecting log location to alternative storage), custom error page functionality and other native features.
 
 Consider quality assurance measures to demonstrate the continuity of existing functionality.  These may include liaison with staff, compliance with existing practices and integration with existing processes for quality assurance (functionality testing), operational support (monitoring and notification) and change management.
 
+### State management systems
+
+State management systems that provide a mechanism for managing Apache httpd include 
+* [Puppet](https://github.com/puppetlabs/puppetlabs-apache)
+* [Chef](https://github.com/chef-cookbooks/httpd)
+* [Ansible](https://github.com/geerlingguy/ansible-role-apache)
+* [Saltstack](https://docs.saltstack.com/en/latest/ref/states/all/salt.states.apache.html)
+
+Of these, Puppet is preferred as the Apache httpd module can scale from managing a single machine to many, has a small installation footprint, requires no extra infrastructure, is actively supported by Puppet Labs and many contributors.  
+
+Chef is of similar maturity and sophistication, but introduces a requirement for an extra machine to manage a master, which manages the web server state. 
+
+Ansible similarly requires a master server and uses SSH to manage the web server state.
+
+Saltstack similarly uses SSH to connect to web servers but installation of agents to managed servers is preferred.
+
 ## 7 Solution documentation
 
 Documenatary information about the solution will be published here
+
+### 7.1 Identifying flaws in the current Apache web server configuration
+
+[Zed Attack Proxy](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project) is a product of the [Open Web Application Security Project](https://www.owasp.org/index.php/Main_Page)
+
+### 7.2 Preparing web servers for state management
+
+### 7.3 Managing web servers with Puppet
 
 ## 8 Solution resources
 
