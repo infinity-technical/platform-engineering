@@ -582,7 +582,11 @@ Documenatary information about the solution will be published here
 
 ### 7.1 Identifying flaws in the current Apache web server configuration
 
-[Zed Attack Proxy](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project) is a product of the [Open Web Application Security Project](https://www.owasp.org/index.php/Main_Page)
+An initial scan with [Zed Attack Proxy](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project) reported [several risks](zap-report.html)
+
+A more thorough scan with [Nikto](https://github.com/sullo/nikto) reported [several risks](nikto-report.txt)
+
+A scan of the Node server with [NodeJsScan](https://github.com/ajinabraham/NodeJsScan) reported 
 
 ### 7.2 Preparing web servers for state management
 

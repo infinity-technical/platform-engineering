@@ -1,5 +1,7 @@
 # Port scan
 
+Redacted output
+
     Starting Nmap 7.10 ( https://nmap.org ) at 2016-06-04 10:47 CEST
     Nmap scan report for XXX-XXX-XXX-XXX-96.eu-west-1.compute.amazonaws.com (XXX.XXX.XXX.96)
     Host is up (0.17s latency).
