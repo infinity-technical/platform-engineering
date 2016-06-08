@@ -1,7 +1,9 @@
 #!/bin/bash
 
 
-echo Requires unzip, wget and puppet
+echo Set up target machine
+echo
+echo First, ensure that the required applications to create state management are available
 
 echo
 
@@ -13,21 +15,36 @@ WGET=$( which wget )
 PUPPET=$( which puppet )
 
 
-if [ "${UNZIP}" = "" ] ; then
-  echo unzip not found
-  exit 1
+if [ "${WGET}" = "" ] ; then
+  echo Installing wget
+  sudo apt-get install wget
+else
+  echo Found ${WGET}
 fi
 
-if [ "${WGET}" = "" ] ; then
-  echo wget not found
-  exit 2
+if [ "${UNZIP}" = "" ] ; then
+  echo installing unzip
+  sudo apt-get install unzip
+else
+  echo Found ${UNZIP}
 fi
 
 if [ "${PUPPET}" = "" ] ; then
-  echo puppet not found
-  exit 3
+  echo installing puppet-common from apt.puppetlabs.com as the version in the ubuntu repository does not provide the module subcommand
+  DEB=puppetlabs-release-precise.deb
+  SOURCE=http://apt.puppetlabs.com/${DEB}
+  DESTINATION=/tmp/${DEB}
+  wget -O ${DESTINATION} ${SOURCE}
+  sudo dpkg -i ${DESTINATION}
+  sudo apt-get update
+  sudo apt-get install puppet-common
+else
+  echo Found ${PUPPET}, checking for a version with the module subcommand
+  puppet --version
 fi
 
+
+sudo puppet module install puppetlabs-apache
 
 
 ARCHIVE="master.zip"
@@ -49,6 +66,4 @@ echo
 unzip ${ARCHIVE}
 
 
-cd platform-engineering-master
-
-ls -l
+sudo puppet apply --verbose --detailed-exitcodes --noop platform-engineering-master/manifests/main.pp
