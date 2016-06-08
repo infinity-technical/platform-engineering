@@ -6,11 +6,11 @@ echo Requires unzip, wget and puppet
 echo
 
 
-UNZIP=which unzip
+UNZIP=$( which unzip )
 
-WGET=which wget
+WGET=$( which wget )
 
-PUPPET=which puppet
+PUPPET=$( which puppet )
 
 
 if [ "${UNZIP}" = "" ] ; then
