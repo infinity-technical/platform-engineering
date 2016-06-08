@@ -19,31 +19,50 @@ This repository does not include the original problem specification, which is av
 
 It is stated that unprovisioned servers on which the solution should work will be clean installs, but not which operating system(s).
 
+GB:  Assume Ubuntu for the purpose of the test; I believe we run Ubuntu 12.04 on the Platform Tech Test instances.
+
+
 ### 1.2 How much time do changes take currently ?
 
 The solution should measurably improve delivery time.
+
+GB:  Whilst no specific measure of time is available, assume due to the manually-managed nature of the existing solution that changes take 'days' to implement, and therefore anything shorter than that would be an improvement. 
  
 ### 1.3 Does the load balancer affect the operation of the Apache web server ?
 
 A simple load balancing approach should not; a more sophisticated approach may involve changes to the requests and responses which will need to be investigated as part of a comprehensive solution defintion.
-x   
+
+GB: The load balancer doesn't do anything with the request/response.
+
 ### 1.4 Is version control with Subversion a part of the current server management strategy ?
 
 /opt/apache/conf/extra/httpd-vhosts.conf contains information about a Subversion repository
+
+GB: Subversion isn't used at all here; just coincidence.
 
 ### 1.5 Is Ansible part of the current server management strategy ?
 
 Ansible binaries are present in /usr/local/bin, and the ubuntu user's home directory contains a .ansible directory
 
+GB: It isn't; all changes to the system are manually implemented by the System Administration team
+
 ## 2 Assumptions
 
-**The username ubuntu does not mean that the target operating system is ubuntu.**  Check the OS on the server.
+**The username ubuntu does not mean that the target operating system is ubuntu.**  
 
-**The load balancer does not affect the operation of the web servers.** I've requested further information about this.
+Confirmed that the server is running Ubuntu.  Notes below.
 
-**Amendments of the Apache configuration were conducted within the Apache configuration files.** Investigation may extend to other areas of the operating system.
+**The load balancer does not affect the operation of the web servers.** 
 
-**The web developers mentioned in the user story are internal staff in the web team mentioned in the background.** Solutions available to permanent staff may not be available to contract, freelance or other web developers.
+Confirmed that this is the case by email.
+
+**Amendments of the Apache configuration were conducted within the Apache configuration files.** 
+
+Confirmed that Apache is being used as a proxy for Node.  Notes below.
+
+**The web developers mentioned in the user story are internal staff in the web team mentioned in the background.** 
+
+Solutions available to permanent staff may not be available to contract, freelance or other web developers.
 
 **The platform engineer has a working local environment.** 
   * Git client
@@ -53,6 +72,18 @@ Ansible binaries are present in /usr/local/bin, and the ubuntu user's home direc
   * Port scanner (nmap)
   * Web browser (Vivaldi)
   * SSH client (OpenSSH)
+
+** Installation of applications required for operation of a state management system is acceptable **
+
+The wget utility will be required to download a Zip archive of this github repository
+
+The unzip utility will be required to uncompress the Zip aarchive
+
+wget and unzip are both available on a clean installation of Ubuntu
+
+The version of Puppet available from the default Ubuntu repositories does not include the module subcommand required to install the PuppetLabs Apache module.  The PuppetLabs release for the target version of Ubuntu will be installed from PuppetLabs repository.
+
+This bootstrapping will be handled by the prepare/setup.sh script in this repository.
 
 ## 3 Stakeholders
 
@@ -204,6 +235,8 @@ and a lsb-release file
     DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"
 
 so this is a long term support version of Ubuntu, Precise Pangolin, from 2012
+
+A test machine has been set up with VirtualBox using the Precise Pangolin ISO from Ubuntu to test bootstrapping and develop the state management solution.
 
 ### 5.08 Confirm which processes are listening to the open ports
 
@@ -568,17 +601,21 @@ State management systems that provide a mechanism for managing Apache httpd incl
 * [Ansible](https://github.com/geerlingguy/ansible-role-apache)
 * [Saltstack](https://docs.saltstack.com/en/latest/ref/states/all/salt.states.apache.html)
 
-Of these, Puppet is preferred as the Apache httpd module can scale from managing a single machine to many, has a small installation footprint, requires no extra infrastructure, is actively supported by Puppet Labs and many contributors.  
+Of these, Puppet is preferred as the Apache httpd module can scale from managing a single machine to many, has a small installation footprint, requires no extra infrastructure, is actively supported by Puppet Labs and many contributors.  PuppetLabs Forge contains a module for management of the Apache web server.  The quality of Puppet modules from the PuppetLabs Forge is as variable as can be expected from public contributions.  The Apache module is provided and maintained by PuppetLabs and can be considered suitable for this assignment.
 
-Chef is of similar maturity and sophistication, but introduces a requirement for an extra machine to manage a master, which manages the web server state. 
+Puppet commonly utilises one or more Puppet Masters to manage the state of a number of slave machines.  FOr the purposes of this exercise, Puppet will be run on the target machien and no Puppet Master will be required.
+
+Chef is of comparable maturity and sophistication to Puppet but introduces a requirement for an extra machine to manage a master, which manages the web server state.  The provision of additional infrastructure would introduce complexity to the solution. 
 
 Ansible similarly requires a master server and uses SSH to manage the web server state.
 
-Saltstack similarly uses SSH to connect to web servers but installation of agents to managed servers is preferred.
+Saltstack similarly uses SSH to connect to web servers but installation of agents to managed servers is preferred.  Minimising the footprint of the solution is preferred.
 
 ## 7 Solution documentation
 
-Documenatary information about the solution will be published here
+Bootstrapping will take the form of running a provided Bash script to check for and if necessary install required utilities, a version of Puppet that provides the modules subcommand, the PuppetLabs Apache module and manifests (along with any Puppet files, Puppet templates and Hiera data) to manage the system state.
+
+Consideration will be given to ensuring that Puppet regularly performs any state correction required.
 
 ### 7.1 Identifying flaws in the current Apache web server configuration
 
@@ -586,9 +623,12 @@ An initial scan with [Zed Attack Proxy](https://www.owasp.org/index.php/OWASP_Ze
 
 A more thorough scan with [Nikto](https://github.com/sullo/nikto) reported [several risks](nikto-report.txt)
 
-A scan of the Node server with [NodeJsScan](https://github.com/ajinabraham/NodeJsScan) reported 
+A scan of the Node server with [NodeJsScan](https://github.com/ajinabraham/NodeJsScan) was outside the scope of this assignment. 
 
 ### 7.2 Preparing web servers for state management
+
+    ubuntu@target ~ $ wget https://raw.githubusercontent.com/infintiy-technical/platform-engineering/master/prepare/setup.sh
+    ubuntu@target ~ $ bash setup.sh
 
 ### 7.3 Managing web servers with Puppet
 
