@@ -66,4 +66,4 @@ echo
 unzip ${ARCHIVE}
 
 
-sudo puppet apply --verbose --detailed-exitcodes --noop platform-engineering-master/manifests/main.pp
+sudo puppet apply --verbose --detailed-exitcodes --noop platform-engineering-master/puppet/manifests/main.pp
