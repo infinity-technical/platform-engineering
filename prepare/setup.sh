@@ -17,7 +17,7 @@ if [ "${GIT}" = "" ] ; then
   echo Installing git
   sudo apt-get install -y git
 else
-  echo Found ${WGET}
+  echo Found ${GIT}
 fi
 
 if [ "${PUPPET}" = "" ] ; then
