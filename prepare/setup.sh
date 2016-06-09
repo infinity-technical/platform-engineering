@@ -8,23 +8,21 @@ echo First, ensure that the required applications to create state management are
 echo
 
 
-UNZIP=$( which unzip )
-
-WGET=$( which wget )
+GIT=$( which git )
 
 PUPPET=$( which puppet )
 
 
-if [ "${WGET}" = "" ] ; then
-  echo Installing wget
-  sudo apt-get install wget
+if [ "${GIT}" = "" ] ; then
+  echo Installing git
+  sudo apt-get install -y git
 else
   echo Found ${WGET}
 fi
 
 if [ "${UNZIP}" = "" ] ; then
   echo installing unzip
-  sudo apt-get install unzip
+  sudo apt-get install -y unzip
 else
   echo Found ${UNZIP}
 fi
@@ -47,9 +45,7 @@ fi
 sudo puppet module install puppetlabs-apache
 
 
-ARCHIVE="master.zip"
-
-REPOSITORY_URL="https://github.com/infinity-technical/platform-engineering/archive/${ARCHIVE}"
+REPOSITORY="https://github.com/infinity-technical/platform-engineering.git"
 
 
 echo Clearing any existing files
@@ -59,23 +55,12 @@ if [ -d platform-engineering ] ; then
   rm -rf platform-engineering
 fi
 
-if [ -e master.zip ] ; then
-  echo Removing master.zip
-  rm master.zip
-fi
 
-echo Downloading repository archive
+echo Downloading repository
 
 echo
 
-wget ${REPOSITORY_URL}
+git clone ${REPOSITORY}
 
 
-echo Unpacking archive
-
-echo
-
-unzip ${ARCHIVE}
-
-
-sudo puppet apply --verbose --detailed-exitcodes --noop platform-engineering-master/puppet/manifests/main.pp
+sudo puppet apply --verbose --detailed-exitcodes --noop platform-engineering/puppet/manifests/main.pp
