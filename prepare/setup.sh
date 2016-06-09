@@ -35,11 +35,15 @@ else
 fi
 
 
+echo Installing PuppetLabs Apache module
+
 sudo puppet module install puppetlabs-apache
 
 
 REPOSITORY="https://github.com/infinity-technical/platform-engineering.git"
 
+
+echo Cloning state management system
 
 echo Clearing any existing files
 
