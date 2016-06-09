@@ -52,6 +52,18 @@ ARCHIVE="master.zip"
 REPOSITORY_URL="https://github.com/infinity-technical/platform-engineering/archive/${ARCHIVE}"
 
 
+echo Clearing any existing files
+
+if [ -d platform-engineering ] ; then
+  echo Removing platform-engineering/
+  rm -rf platform-engineering
+fi
+
+if [ -e master.zip ] ; then
+  echo Removing master.zip
+  rm master.zip
+fi
+
 echo Downloading repository archive
 
 echo
