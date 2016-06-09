@@ -12,16 +12,10 @@ class { 'apache' :
     # the version parameter defaults to latest
 
     apache::vhost { 'localhost' :
-        servername    => 'localhost',
-        ip_based      => true,
-        ip            => '10.0.2.15',
-        port          => 80,
-        docroot       => '/var/www',
-        docroot_owner => 'www',
-        docroot_group => 'www',
-        proxy_pass    => [
-                            {'path' => '/', 'url' => 'http://localhost:1337' },
-                         ]
+        port => 80,
+        docroot => '/opt/web/www',
+        docroot_owner => 'www-data',
+        docroot_group => 'www-data',
     }
 
 }
