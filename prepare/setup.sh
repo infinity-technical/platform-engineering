@@ -20,13 +20,6 @@ else
   echo Found ${WGET}
 fi
 
-if [ "${UNZIP}" = "" ] ; then
-  echo installing unzip
-  sudo apt-get install -y unzip
-else
-  echo Found ${UNZIP}
-fi
-
 if [ "${PUPPET}" = "" ] ; then
   echo installing puppet-common from apt.puppetlabs.com as the version in the ubuntu repository does not provide the module subcommand
   DEB=puppetlabs-release-precise.deb
