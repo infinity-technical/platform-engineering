@@ -591,7 +591,12 @@ The version of Apache installed is 2.2.4; the most recent release is 2.4.20 and 
 
 Consider enhancements to the current Apache configuration to implement log management strategies (log rotation, archiving, connecting log location to alternative storage), custom error page functionality and other native features.
 
-Consider quality assurance measures to demonstrate the continuity of existing functionality.  These may include liaison with staff, compliance with existing practices and integration with existing processes for quality assurance (functionality testing), operational support (monitoring and notification) and change management.
+### Monitoring and notification
+
+Consider quality assurance measures to demonstrate the continuity of existing functionality.  These may include liaison with staff, compliance with existing practices and integration with existing processes for quality assurance (functionality testing), operational support (monitoring and notification) and change management.  
+
+An agentless solution (Nagios, Icinga or similar) provisioned in the target network would mean fewest changes to the target server.  Installing an agent has it's own risks and maintenance overhead, but improves the quality of information in the monitoring system.
+I have selected an agent-based, externally hosted solution from DataDog to provide a balance between monitoring quality and solution footprint that integrates quickly with Ubuntu, Apache and Github.
 
 ### State management systems
 
