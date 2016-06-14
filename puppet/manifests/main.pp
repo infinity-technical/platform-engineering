@@ -9,3 +9,13 @@
 class { 'apache' : 
 
 }
+
+apache::vhost { 'vhost.example.com':
+  port    => '80',
+  docroot => '/var/www/vhost',
+}
+ 
+file { '/var/www/vhost':
+  ensure => directory,
+  owner  => 'www-data',
+}
