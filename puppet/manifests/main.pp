@@ -12,6 +12,7 @@ class { 'apache' :
 
 # for now, there is an additional line added to the test machine /etc/hosts
 # 127.0.0.1 vhost.example.com
+# so from the test machine we can curl http://vhost.example.com and confirm the expected content
 
 apache::vhost { 'vhost.example.com':
   port    => '80',
