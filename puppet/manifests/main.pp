@@ -19,3 +19,10 @@ file { '/var/www/vhost':
   ensure => directory,
   owner  => 'www-data',
 }
+
+file { '/var/www/vhost/index.html':
+  ensure  => present,
+  content => file ('/home/ubuntu/platform-engineering/puppet/files/vhost-index.html'),
+}
+
+class { 'datadog_agent': api_key
