@@ -15,8 +15,9 @@ class { 'apache' :
 # so from the test machine we can curl http://vhost.example.com and confirm the expected content
 
 apache::vhost { 'vhost.example.com':
-  port    => '80',
-  docroot => '/var/www/vhost',
+  port       => '80',
+  docroot    => '/var/www/vhost',
+  proxy_pass => [ ( 'path' => '/', 'url' => 'http://localhost:1337/' ) ],
 }
  
 file { '/var/www/vhost':
