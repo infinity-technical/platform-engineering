@@ -632,7 +632,7 @@ A scan of the Node server with [NodeJsScan](https://github.com/ajinabraham/NodeJ
 
 ### 7.2 Preparing web servers for state management
 
-    ubuntu@target ~ $ wget https://raw.githubusercontent.com/infintiy-technical/platform-engineering/master/prepare/setup.sh
+    ubuntu@target ~ $ wget https://raw.githubusercontent.com/infinity-technical/platform-engineering/master/prepare/setup.sh
     ubuntu@target ~ $ bash setup.sh
 
 ### 7.3 Managing web servers with Puppet
