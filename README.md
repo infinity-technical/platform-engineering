@@ -637,6 +637,32 @@ A scan of the Node server with [NodeJsScan](https://github.com/ajinabraham/NodeJ
 
 ### 7.3 Managing web servers with Puppet
 
+In order to minimise uncertainty, I suggest a phased approach in which state management would be introduced and extended until a working balance is established, with appropriate skills introduced and processes agreed.
+
+By treating the Apache configuration files as static files, they can be exactly replicated by Puppet.  This enables the provision of a like-for-like configuration, which has parallels to the current system.  
+
+A first extension would be to convert the static Apache configuration files into Puppet templates.  These would be populated with data defined in the Puppet class which manages the configuration file.  This enables the web team to make changes using merge requests, with the system admin team handling code review and implementation.
+
+If further abstraction is required, configuration data can be handed off to Hiera and defined in YAML.
+
+The management of web server can be most effectively performed using a trusted Puppet module.  This allows for a degree of sophistication which would be time consuming to produce from scratch, allowing for upgrading of Apache and the underlying operating system.
+
 ## 8 Solution resources
 
-Code, examples and other non-documentary information will be published here
+### Phase 1
+
+Static Apache configuration files
+
+### Phase 2
+
+Templated Apache configuration files
+
+### Phase 3
+
+Templated Apache configuration files with YAML
+
+### Phase 4
+
+Apache module
+
+
