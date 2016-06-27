@@ -658,20 +658,23 @@ The management of web server can be most effectively performed using a trusted P
 
 ## 8 Solution resources
 
-### Phase 1
+A list of technical tasks are provided in puppet/README.md, which would be published in the agreed task management solution (Jira, Trello or similar)
 
-Static Apache configuration files
+Puppet is run locally to minimise the need for additional infrastructure.
 
-### Phase 2
+In first three phases, the focus is on managing the Apache configuration files.  In the final phase, the Apache application and it's configuration are managed.
 
-Templated Apache configuration files
+### Phase 1 : Manage Apache configuration files
 
-### Phase 3
+Use Puppet to ensure that static Apache configuration files which exactly duplicate the existing configuration are in place. 
+### Phase 2 : Convert Apache configuration files to templates
 
-Templated Apache configuration files with YAML
+Convert the static Apache configuration files to .erb templates.  Placeholders are filled with data provided in the main manifest.
 
-### Phase 4
+### Phase 3 : Convert definitions to YAML
 
-Apache module
+Migrate data definition from the class to YAML files managed by Hiera
 
+### Phase 4 : Manage the Apache application
 
+Either use the Apache module provided by PuppetLabs or reimplement if required
