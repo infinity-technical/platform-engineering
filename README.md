@@ -73,7 +73,7 @@ Solutions available to permanent staff may not be available to contract, freelan
   * Web browser (Vivaldi)
   * SSH client (OpenSSH)
 
-** Installation of applications required for operation of a state management system is acceptable **
+**Installation of applications required for operation of a state management system is acceptable**
 
 The wget utility will be required to download a Zip archive of this github repository
 
