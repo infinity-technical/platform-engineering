@@ -21,7 +21,6 @@ It is stated that unprovisioned servers on which the solution should work will b
 
 GB:  Assume Ubuntu for the purpose of the test; I believe we run Ubuntu 12.04 on the Platform Tech Test instances.
 
-
 ### 1.2 How much time do changes take currently ?
 
 The solution should measurably improve delivery time.
@@ -65,6 +64,7 @@ Confirmed that Apache is being used as a proxy for Node.  Notes below.
 Solutions available to permanent staff may not be available to contract, freelance or other web developers.
 
 **The platform engineer has a working local environment.** 
+
   * Git client
   * Active internet connection
   * Supplied credentials file
@@ -73,27 +73,28 @@ Solutions available to permanent staff may not be available to contract, freelan
   * Web browser (Vivaldi)
   * SSH client (OpenSSH)
 
+I used a Mac for development and a VirtualBox VM running Ubuntu 12.04 LTS for testing.
+
 **Installation of applications required for operation of a state management system is acceptable**
 
-The wget utility will be required to download a Zip archive of this github repository
-
-The unzip utility will be required to uncompress the Zip aarchive
-
-wget and unzip are both available on a clean installation of Ubuntu
+The git utility will be required to clone this repository.  Git can be installed with apt.
 
 The version of Puppet available from the default Ubuntu repositories does not include the module subcommand required to install the PuppetLabs Apache module.  The PuppetLabs release for the target version of Ubuntu will be installed from PuppetLabs repository.
 
-This bootstrapping will be handled by the prepare/setup.sh script in this repository.
+I have provided a script (prepare/setup.sh) to check for and install these dependencies.
 
 ## 3 Stakeholders
 
-* Technical test co-ordinator
-* Platform engineer
+Communication with and between the stakeholders would be required
+
+* Technical test co-ordinator and platform engineer
 * University of Leodis
 * Web development team
 * System administration team
 
 ## 4 Preparation of platform engineer working environemnt
+
+The Ubuntu VM was prepared with care to avoid committing credentials
 
 1 Clone this repository with Git
 
@@ -115,7 +116,15 @@ This bootstrapping will be handled by the prepare/setup.sh script in this reposi
 
 ## 5 Information gathering
 
-Determining the existing server cofiguration will assist in selecting appropriate tools and techniques
+Some aspects of the server purpose were provided.  Determining the existing server configuration helped with selecting appropriate tools and techniques.
+
+Initial investigation consisted of a port scan, DNS query, retrieval of public information about the server and visual inspection of the website.  This was followed by a terminal session on the server to inspect the home directories, shell history, boot customisation, regularly scheduled commands and confirm the exact operating system.
+
+After examining the running processes and associated listening ports, the configuration of the Apache web server was reviewed.  
+
+The main findings were the use of Apache as a proxy for the underlying Node service, the presence of multiple installations of NodeJs and signs of previous use of Ansible.  
+
+The requirement to manage Apache seems inconsistent with the implementation in Node.
 
 ### 5.01 Scan open ports on the target machine
 
@@ -125,7 +134,7 @@ A polite port scan of ${REMOTE_FQDN} shows three ports listening
 * 80
 * 443
 
-[Full port scan log](./port-scan.md)
+The full output of the port scan can be found at [Full port scan log](./port-scan.md)
 
 ### 5.02 Check public DNS information about the website
 
@@ -177,9 +186,9 @@ Several of the hidden files may be relevant
     drwx------ 2 ubuntu ubuntu 4.0K Dec  7 06:10 .ssh
     -rw-r--r-- 1 ubuntu ubuntu    0 Dec  7 06:10 .sudo_as_admin_successful
 
-The .ansible file may indicate a partial or complete solution in place.  Further information has been requested.
+The .ansible file may indicate a partial or complete solution in place.  Further information was requested.
 
-Checked user's .profile, .bashrc for customisation but nothing obvious was found
+Checked the ubuntu user's .profile and .bashrc files for customisation but nothing obvious was found
 
 Checked for scheduled commands for the ubuntu user and the root user
 
